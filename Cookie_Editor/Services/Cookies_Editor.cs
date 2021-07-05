@@ -23,7 +23,7 @@ namespace Cookie_Editor.Services
 
 
         private bool _enabled;
-        public Cookies_Listener()
+        public Cookies_Editor()
         {
             InitializeComponent();
             CanStop = true;
@@ -44,8 +44,7 @@ namespace Cookie_Editor.Services
                     try
                     {
                         _chrom_path_to_cookie = $@"C:\Users\{Get_User_Name()}\AppData\Local\Google\Chrome\User Data\Default";
-                        _chrome_watcher = new FileSystemWatcher(_chrom_path_to_cookie); // тут мы укажем то за чем мы следим
-                                                                                        // 
+                        _chrome_watcher = new FileSystemWatcher(_chrom_path_to_cookie); 
 
                         _chrome_watcher.Deleted += Watcher_Deleted;
                         _chrome_watcher.Created += Watcher_Created;
@@ -56,13 +55,11 @@ namespace Cookie_Editor.Services
                     }
                     catch (Exception ex) { EventLog.WriteEntry(ex.Message); }
 
-
-
                     try
                     {
                         _opera_path_to_cookie = $@"C:\Users\{Get_User_Name()}\AppData\Roaming\Opera Software\Opera Stable";
-                        _opera_watcher = new FileSystemWatcher(_opera_path_to_cookie); // тут мы укажем то за чем мы следим
-                                                                                       // 
+                        _opera_watcher = new FileSystemWatcher(_opera_path_to_cookie); 
+                        
                         _opera_watcher.Deleted += Watcher_Deleted;
                         _opera_watcher.Created += Watcher_Created;
                         _opera_watcher.Changed += Watcher_Changed;
@@ -76,8 +73,8 @@ namespace Cookie_Editor.Services
                     try
                     {
                         _firefox_path_to_cookie = $@"{Get_FireFox_Cookies_Dir()}";
-                        _firefox_watcher = new FileSystemWatcher(_firefox_path_to_cookie); // тут мы укажем то за чем мы следим
-                                                                                           // 
+                        _firefox_watcher = new FileSystemWatcher(_firefox_path_to_cookie); 
+                        
                         _firefox_watcher.Deleted += Watcher_Deleted;
                         _firefox_watcher.Created += Watcher_Created;
                         _firefox_watcher.Changed += Watcher_Changed;
@@ -94,7 +91,7 @@ namespace Cookie_Editor.Services
                 catch (Exception ex) { EventLog.WriteEntry(ex.Message); }
             }
         }
-        //получить директорию с куками фаер фокса так как они меняются в зависимости от версии
+        
         private string Get_FireFox_Cookies_Dir()
         {
             string _FireFoxe_cookiesDB_name = "cookies.sqlite";
@@ -110,10 +107,10 @@ namespace Cookie_Editor.Services
             catch (Exception ex) { throw new Exception("FireFox : cookies not found"); }
         }
 
-        // переименование файлов
+        
         private void Watcher_Renamed(object sender, RenamedEventArgs e)
         {
-            string fileEvent = "переименован в " + e.FullPath;
+            string fileEvent = " переименован в " + e.FullPath;
             string filePath = e.OldFullPath;
             if (filePath.Contains(_chrom_path_to_cookie))
                 Chrom_RecordEntry(fileEvent, filePath);
@@ -122,9 +119,9 @@ namespace Cookie_Editor.Services
             if (filePath.Contains(_firefox_path_to_cookie))
                 FireFox_RecordEntry(fileEvent, filePath);
             else
-                EventLog.WriteEntry("Он не понял куда записать");
+                EventLog.WriteEntry("Запись не удалась.");
         }
-        // изменение файлов
+        
         private void Watcher_Changed(object sender, FileSystemEventArgs e)
         {
             string fileEvent = "изменен";
@@ -136,9 +133,9 @@ namespace Cookie_Editor.Services
             if (filePath.Contains(_firefox_path_to_cookie))
                 FireFox_RecordEntry(fileEvent, filePath);
             else
-                EventLog.WriteEntry("Он не понял куда записать");
+                EventLog.WriteEntry("Запись не удалась.");
         }
-        // создание файлов
+        
         private void Watcher_Created(object sender, FileSystemEventArgs e)
         {
             string fileEvent = "создан";
@@ -150,9 +147,9 @@ namespace Cookie_Editor.Services
             if (filePath.Contains(_firefox_path_to_cookie))
                 FireFox_RecordEntry(fileEvent, filePath);
             else
-                EventLog.WriteEntry("Он не понял куда записать");
+                EventLog.WriteEntry("Запись не удалась.");
         }
-        // удаление файлов
+        
         private void Watcher_Deleted(object sender, FileSystemEventArgs e)
         {
             string fileEvent = "удален";
@@ -164,7 +161,7 @@ namespace Cookie_Editor.Services
             if (filePath.Contains(_firefox_path_to_cookie))
                 FireFox_RecordEntry(fileEvent, filePath);
             else
-                EventLog.WriteEntry("Он не понял куда записать");
+                EventLog.WriteEntry("Запись не удалась.");
         }
 
         public string Get_User_Name()
@@ -174,7 +171,7 @@ namespace Cookie_Editor.Services
             return collection.Cast<ManagementBaseObject>().First()["UserName"].ToString().Split('\\')[1].Split('-').Last();
         }
 
-        // запись в лог
+        
         private void Chrom_RecordEntry(string fileEvent, string filePath)
         {
             string _name_log_file = @"\log_fo_Chrome.txt";
@@ -186,6 +183,7 @@ namespace Cookie_Editor.Services
                 writer.Flush();
             }
         }
+        
         private void FireFox_RecordEntry(string fileEvent, string filePath)
         {
             string _name_log_file = @"\log_fo_FireFox.txt";
@@ -197,6 +195,7 @@ namespace Cookie_Editor.Services
                 writer.Flush();
             }
         }
+        
         private void Opera_RecordEntry(string fileEvent, string filePath)
         {
             string _name_log_file = @"\log_fo_Opera.txt";
@@ -208,6 +207,7 @@ namespace Cookie_Editor.Services
                 writer.Flush();
             }
         }
+        
         protected override void OnStop()
         {
             _firefox_watcher.EnableRaisingEvents = false;
