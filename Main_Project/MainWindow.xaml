@@ -1,0 +1,25 @@
+﻿<Window x:Class="Examp_System.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Examp_System"
+        mc:Ignorable="d" ResizeMode="NoResize"
+        Title="Cookies View" Height="450" Width="800">
+    <Grid Background="GreenYellow">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button Content="Chrome" Grid.Column="0" Grid.Row="0" Margin="30 10 30 0" Click="Chrome_click"/>
+        <Button Content="Opera" Grid.Column="1" Grid.Row="0" Margin="30 10 30 0" Click="Opera_click"/>
+        <Button Content="FireFox" Grid.Column="2" Grid.Row="0" Margin="30 10 30 0" Click="FireFox_click"/>
+        <DataGrid x:Name="_data_grid" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="2" Margin="15" />
+    </Grid>
+</Window>
