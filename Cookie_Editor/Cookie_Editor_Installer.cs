@@ -20,7 +20,7 @@ namespace Cookie_Editor
 			_process_installer.Username = null;
             
 			_service_installer.StartType = ServiceStartMode.Manual; 				// вид запуска 
-			_service_installer.ServiceName = "listener"; 						// имя службы в списке
+			_service_installer.ServiceName = "Cookie Editor"; 						// имя службы в списке
 			_service_installer.Description = "Приложение просмотра cookie-файлов браузера."; 	// описание
 
 			_service_installer.AfterInstall += _installer_AfterInstall; 				// метод работы после установки
