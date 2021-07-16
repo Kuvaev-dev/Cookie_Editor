@@ -16,7 +16,7 @@ namespace Cookie_Editor{
         {
             ServiceBase[] ServicesToRun = new ServiceBase[]
             {
-                new Cookies_Listener()            
+                new Cookie_Editor()            
             };
             ServiceBase.Run(ServicesToRun);                      
         }
